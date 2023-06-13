@@ -11,7 +11,7 @@ dir(getwd())
 ## If the current directory does not contain the `data` directory, set the
 ## working directory to project root folder (the folder should contain the `data` directory
 ## Use `setwd()` if needed
-setwd("/Users/Daisy/Documents/Xin/Data science/dsc520")
+setwd("/Users/Daisy/Documents/dsc520")
 
 ## Load the file `data/tidynomicon/person.csv` to `person_df1` using `read.csv`
 ## Examine the structure of `person_df1` using `str()`
