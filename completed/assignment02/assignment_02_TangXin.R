@@ -31,13 +31,13 @@ scores_df <- read.csv('data/scores.csv', stringsAsFactors=FALSE)
 summary(scores_df)
 
 ## Load the `readxl` library
-install.packages("readxl")
+#install.packages("readxl")
 library(readxl)
 
 ## Using the excel_sheets() function from the `readxl` package,
 ## list the worksheets from the file `data/G04ResultsDetail2004-11-02.xls`
 setwd("/Users/Daisy/Documents/Xin/Data science/dsc520")
-library(readxl)
+#library(readxl)
 excel_sheets('data/G04ResultsDetail2004-11-02.xls')
 
 ## Using the `read_excel` function, read the Voter Turnout sheet
@@ -62,7 +62,7 @@ str(voter_turnout_df2)
 ## Load the `DBI` library
 ##install.packages("DBI")
 library(DBI)
-install.packages("RSQLite")
+##install.packages("RSQLite")
 library(RSQLite)
 
 
@@ -95,7 +95,7 @@ tables
 dbDisconnect(db)
 
 ## Import the `jsonlite` library
-install.packages("jsonlite")
+#install.packages("jsonlite")
 library(jsonlite)
 
 ## Convert the scores_df dataframe to JSON using the `toJSON()` function

@@ -1,0 +1,439 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[sc]{mathpazo}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+\hypersetup{
+ pdfstartview={XYZ null null 1}}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+
+\makeatother
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+
+
+\title{\title{\title{}}}
+
+
+
+\maketitle
+The results below are generated from an R script.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Assignment: ASSIGNMENT 2}
+\hlcom{# Name: Lastname, Firstname}
+\hlcom{# Date: 2010-02-14}
+
+\hlcom{## Check your current working directory using `getwd()`}
+\hlkwd{getwd}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## [1] "C:/Users/Daisy/Documents/Dsc520/completed/assignment02"
+\end{verbatim}
+\begin{alltt}
+\hlcom{## List the contents of the working directory with the `dir()` function}
+\hlkwd{dir}\hlstd{(}\hlkwd{getwd}\hlstd{())}
+\end{alltt}
+\begin{verbatim}
+## [1] "archive"                   "assignment_02_TangXin.log" "assignment_02_TangXin.pdf"
+## [4] "assignment_02_TangXin.R"   "assignment_02_TangXin.tex"
+\end{verbatim}
+\begin{alltt}
+\hlcom{## If the current directory does not contain the `data` directory, set the}
+\hlcom{## working directory to project root folder (the folder should contain the `data` directory}
+\hlcom{## Use `setwd()` if needed}
+\hlkwd{setwd}\hlstd{(}\hlstr{"/Users/Daisy/Documents/dsc520"}\hlstd{)}
+
+\hlcom{## Load the file `data/tidynomicon/person.csv` to `person_df1` using `read.csv`}
+\hlcom{## Examine the structure of `person_df1` using `str()`}
+\hlstd{person_df1} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{'data/tidynomicon/person.csv'}\hlstd{)}
+\hlkwd{str}\hlstd{(person_df1)}
+\end{alltt}
+\begin{verbatim}
+## 'data.frame':	5 obs. of  3 variables:
+##  $ person_id    : chr  "dyer" "pb" "lake" "roe" ...
+##  $ personal_name: chr  "William" "Frank" "Anderson" "Valentina" ...
+##  $ family_name  : chr  "Dyer" "Pabodie" "Lake" "Roerich" ...
+\end{verbatim}
+\begin{alltt}
+\hlcom{## R interpreted names as factors, which is not the behavior we want}
+\hlcom{## Load the same file to person_df2 using `read.csv` and setting `stringsAsFactors` to `FALSE`}
+\hlcom{## Examine the structure of `person_df2` using `str()`}
+\hlstd{person_df2} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{'data/tidynomicon/person.csv'}\hlstd{,} \hlkwc{stringsAsFactors}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+\hlkwd{str}\hlstd{(person_df2)}
+\end{alltt}
+\begin{verbatim}
+## 'data.frame':	5 obs. of  3 variables:
+##  $ person_id    : chr  "dyer" "pb" "lake" "roe" ...
+##  $ personal_name: chr  "William" "Frank" "Anderson" "Valentina" ...
+##  $ family_name  : chr  "Dyer" "Pabodie" "Lake" "Roerich" ...
+\end{verbatim}
+\begin{alltt}
+\hlcom{## Read the file `data/scores.csv` to `scores_df`}
+\hlcom{## Display summary statistics using the `summary()` function}
+\hlstd{scores_df} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{'data/scores.csv'}\hlstd{,} \hlkwc{stringsAsFactors}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+\hlcom{##str(scores_df)}
+\hlkwd{summary}\hlstd{(scores_df)}
+\end{alltt}
+\begin{verbatim}
+##      Count           Score         Section         
+##  Min.   :10.00   Min.   :200.0   Length:38         
+##  1st Qu.:10.00   1st Qu.:300.0   Class :character  
+##  Median :10.00   Median :322.5   Mode  :character  
+##  Mean   :14.47   Mean   :317.5                     
+##  3rd Qu.:20.00   3rd Qu.:357.5                     
+##  Max.   :30.00   Max.   :395.0
+\end{verbatim}
+\begin{alltt}
+\hlcom{## Load the `readxl` library}
+\hlcom{#install.packages("readxl")}
+\hlkwd{library}\hlstd{(readxl)}
+
+\hlcom{## Using the excel_sheets() function from the `readxl` package,}
+\hlcom{## list the worksheets from the file `data/G04ResultsDetail2004-11-02.xls`}
+\hlkwd{setwd}\hlstd{(}\hlstr{"/Users/Daisy/Documents/Xin/Data science/dsc520"}\hlstd{)}
+\hlcom{#library(readxl)}
+\hlkwd{excel_sheets}\hlstd{(}\hlstr{'data/G04ResultsDetail2004-11-02.xls'}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##  [1] "Instructions"          "Voter Turnout"         "President"            
+##  [4] "House of Rep"          "Co Clerk"              "Co Reg Deeds"         
+##  [7] "Co Public Defender"    "Co Comm 1"             "Co Comm 3"            
+## [10] "Co Comm 5"             "Co Comm 7"             "St Bd of Ed 2"        
+## [13] "St Bd of Ed 4"         "Legislature 5"         "Legislature 7"        
+## [16] "Legislature 9"         "Legislature 11"        "Legislature 13"       
+## [19] "Legislature 23"        "Legislature 31"        "Legislature 39"       
+## [22] "MCC 1"                 "MCC 2"                 "MCC 3"                
+## [25] "MCC 4"                 "OPPD"                  "MUD"                  
+## [28] "NRD 3"                 "NRD 5"                 "NRD 7"                
+## [31] "NRD 9"                 "OPS 2"                 "OPS 4"                
+## [34] "OPS 6"                 "OPS 8"                 "OPS 10"               
+## [37] "OPS 11"                "OPS 12"                "ESU 2"                
+## [40] "ESU 3"                 "Arlington Sch 24"      "Bennington Sch 59"    
+## [43] "Elkhorn Sch 10"        "Fremont Sch 1"         "Ft Calhoun Sch 3"     
+## [46] "Gretna Sch 37"         "Millard Sch 17"        "Ralston Sch 54"       
+## [49] "Valley Sch 33"         "Waterloo Sch 11"       "Bennington Mayor"     
+## [52] "Elkhorn Mayor"         "Valley Mayor"          "Ralston Mayor"        
+## [55] "Ralston Library Bd"    "Bennington City Cnc 1" "Bennington City Cnc 2"
+## [58] "Elkhorn City Cnc A"    "Elkhorn City Cnc B"    "Elkhorn City Cnc C"   
+## [61] "Ralston City Cnc 1"    "Ralston City Cnc 2"    "Ralston City Cnc 6"   
+## [64] "Waterloo Bd Trustees"  "Valley City Cnc"       "Amendment 1"          
+## [67] "Amendment 2"           "Amendment 3"           "Amendment 4"          
+## [70] "Initiative 417"        "Initiative 418"        "Initiative 419"       
+## [73] "Initiative 420"
+\end{verbatim}
+\begin{alltt}
+\hlcom{## Using the `read_excel` function, read the Voter Turnout sheet}
+\hlcom{## from the `data/G04ResultsDetail2004-11-02.xls`}
+\hlcom{## Assign the data to the `voter_turnout_df1`}
+\hlcom{## The header is in the second row, so make sure to skip the first row}
+\hlcom{## Examine the structure of `voter_turnout_df1` using `str()`}
+
+\hlstd{voter_turnout_df1} \hlkwb{<-} \hlkwd{read_excel}\hlstd{(}\hlstr{'./data/G04ResultsDetail2004-11-02.xls'}\hlstd{,} \hlkwc{sheet} \hlstd{=} \hlstr{'Voter Turnout'}\hlstd{,} \hlkwc{skip} \hlstd{=} \hlnum{1}\hlstd{)}
+\hlkwd{str}\hlstd{(voter_turnout_df1)}
+\end{alltt}
+\begin{verbatim}
+## tibble [342 x 4] (S3: tbl_df/tbl/data.frame)
+##  $ Ward Precinct    : chr [1:342] "01-01" "01-02" "01-03" "01-04" ...
+##  $ Ballots Cast     : num [1:342] 421 443 705 827 527 323 358 410 440 500 ...
+##  $ Registered Voters: num [1:342] 678 691 1148 1308 978 ...
+##  $ Voter Turnout    : num [1:342] 0.621 0.641 0.614 0.632 0.539 ...
+\end{verbatim}
+\begin{alltt}
+\hlcom{## Using the `read_excel()` function, read the Voter Turnout sheet}
+\hlcom{## from `data/G04ResultsDetail2004-11-02.xls`}
+\hlcom{## Skip the first two rows and manually assign the columns using `col_names`}
+\hlcom{## Use the names "ward_precint", "ballots_cast", "registered_voters", "voter_turnout"}
+\hlcom{## Assign the data to the `voter_turnout_df2`}
+\hlcom{## Examine the structure of `voter_turnout_df2` using `str()`}
+\hlstd{my_col} \hlkwb{=}\hlkwd{c}\hlstd{(}\hlstr{"ward_precint"}\hlstd{,} \hlstr{"ballots_cast"}\hlstd{,} \hlstr{"registered_voters"}\hlstd{,} \hlstr{"voter_turnout"}\hlstd{)}
+\hlstd{voter_turnout_df2} \hlkwb{<-} \hlkwd{read_excel}\hlstd{(}\hlstr{'./data/G04ResultsDetail2004-11-02.xls'}\hlstd{,} \hlkwc{sheet} \hlstd{=} \hlstr{'Voter Turnout'}\hlstd{,} \hlkwc{skip} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{col_names} \hlstd{= my_col)}
+\hlkwd{str}\hlstd{(voter_turnout_df2)}
+\end{alltt}
+\begin{verbatim}
+## tibble [342 x 4] (S3: tbl_df/tbl/data.frame)
+##  $ ward_precint     : chr [1:342] "01-01" "01-02" "01-03" "01-04" ...
+##  $ ballots_cast     : num [1:342] 421 443 705 827 527 323 358 410 440 500 ...
+##  $ registered_voters: num [1:342] 678 691 1148 1308 978 ...
+##  $ voter_turnout    : num [1:342] 0.621 0.641 0.614 0.632 0.539 ...
+\end{verbatim}
+\begin{alltt}
+\hlcom{## Load the `DBI` library}
+\hlcom{##install.packages("DBI")}
+\hlkwd{library}\hlstd{(DBI)}
+\hlcom{##install.packages("RSQLite")}
+\hlkwd{library}\hlstd{(RSQLite)}
+
+
+\hlcom{## Create a database connection to `data/tidynomicon/example.db` using the dbConnect() function}
+\hlcom{## The first argument is the database driver which in this case is `RSQLite::SQLite()`}
+\hlcom{## The second argument is the path to the database file}
+\hlcom{## Assign the connection to `db` variable}
+\hlstd{db} \hlkwb{<-} \hlkwd{dbConnect}\hlstd{(RSQLite}\hlopt{::}\hlkwd{SQLite}\hlstd{(),} \hlstr{'data/tidynomicon/example.db'}\hlstd{)}
+
+\hlcom{## Query the Person table using the `dbGetQuery` function and the}
+\hlcom{## `SELECT * FROM PERSON;` SQL statement}
+\hlcom{## Assign the result to the `person_df` variable}
+\hlcom{## Use `head()` to look at the first few rows of the `person_df` dataframe}
+\hlstd{person_df} \hlkwb{<-} \hlkwd{dbGetQuery}\hlstd{(db,} \hlstr{"SELECT * FROM PERSON"}\hlstd{)}
+\hlkwd{head}\hlstd{(person_df,} \hlkwc{N} \hlstd{=} \hlnum{3}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##   person_id personal_name family_name
+## 1      dyer       William        Dyer
+## 2        pb         Frank     Pabodie
+## 3      lake      Anderson        Lake
+## 4       roe     Valentina     Roerich
+## 5  danforth         Frank    Danforth
+\end{verbatim}
+\begin{alltt}
+\hlcom{## List the tables using the `dbListTables()` function}
+\hlcom{## Assign the result to the `table_names` variable}
+\hlstd{table_names} \hlkwb{<-} \hlkwd{dbListTables}\hlstd{(db)}
+\hlstd{table_names}
+\end{alltt}
+\begin{verbatim}
+## [1] "Measurements" "Person"       "Site"         "Visited"
+\end{verbatim}
+\begin{alltt}
+\hlcom{#class(table_names)}
+
+\hlcom{## Read all of the tables at once using the `lapply` function and assign the result to the `tables` variable}
+\hlcom{## Use `table_names`, `dbReadTable`, and `conn = db` as arguments}
+\hlcom{## Print out the tables}
+\hlstd{tables} \hlkwb{<-} \hlkwd{lapply}\hlstd{(table_names, dbReadTable,} \hlkwc{conn} \hlstd{= db)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Column `reading`: mixed type, first seen values of type real, coercing other values of type string}}\begin{alltt}
+\hlstd{tables}
+\end{alltt}
+\begin{verbatim}
+## [[1]]
+##    visit_id person_id quantity reading
+## 1       619      dyer      rad    9.82
+## 2       619      dyer      sal    0.13
+## 3       622      dyer      rad    7.80
+## 4       622      dyer      sal    0.09
+## 5       734        pb      rad    8.41
+## 6       734      lake      sal    0.05
+## 7       734        pb     temp  -21.50
+## 8       735        pb      rad    7.22
+## 9       735      <NA>      sal    0.06
+## 10      735      <NA>     temp  -26.00
+## 11      751        pb      rad    4.35
+## 12      751        pb     temp  -18.50
+## 13      751      lake      sal    0.00
+## 14      752      lake      rad    2.19
+## 15      752      lake      sal    0.09
+## 16      752      lake     temp  -16.00
+## 17      752       roe      sal   41.60
+## 18      837      lake      rad    1.46
+## 19      837      lake      sal    0.21
+## 20      837       roe      sal   22.50
+## 21      844       roe      rad   11.25
+## 
+## [[2]]
+##   person_id personal_name family_name
+## 1      dyer       William        Dyer
+## 2        pb         Frank     Pabodie
+## 3      lake      Anderson        Lake
+## 4       roe     Valentina     Roerich
+## 5  danforth         Frank    Danforth
+## 
+## [[3]]
+##   site_id latitude longitude
+## 1    DR-1   -49.85   -128.57
+## 2    DR-3   -47.15   -126.72
+## 3   MSK-4   -48.87   -123.40
+## 
+## [[4]]
+##   visit_id site_id visit_date
+## 1      619    DR-1 1927-02-08
+## 2      622    DR-1 1927-02-10
+## 3      734    DR-3 1930-01-07
+## 4      735    DR-3 1930-01-12
+## 5      751    DR-3 1930-02-26
+## 6      752    DR-3       <NA>
+## 7      837   MSK-4 1932-01-14
+## 8      844    DR-1 1932-03-22
+\end{verbatim}
+\begin{alltt}
+\hlcom{## Use the `dbDisconnect` function to disconnect from the database}
+\hlkwd{dbDisconnect}\hlstd{(db)}
+
+\hlcom{## Import the `jsonlite` library}
+\hlcom{#install.packages("jsonlite")}
+\hlkwd{library}\hlstd{(jsonlite)}
+
+\hlcom{## Convert the scores_df dataframe to JSON using the `toJSON()` function}
+\hlkwd{toJSON}\hlstd{(}\hlkwc{x} \hlstd{= scores_df,} \hlkwc{dataframe} \hlstd{=} \hlstr{'values'}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [[10,200,"Sports"],[10,205,"Sports"],[20,235,"Sports"],[10,240,"Sports"],[10,250,"Sports"],[10,265,"Regular"],[10,275,"Regular"],[30,285,"Sports"],[10,295,"Regular"],[10,300,"Regular"],[20,300,"Sports"],[10,305,"Sports"],[10,305,"Regular"],[10,310,"Regular"],[10,310,"Sports"],[20,320,"Regular"],[10,305,"Regular"],[10,315,"Sports"],[20,320,"Regular"],[10,325,"Regular"],[10,325,"Sports"],[20,330,"Regular"],[10,330,"Sports"],[30,335,"Sports"],[10,335,"Regular"],[20,340,"Regular"],[10,340,"Sports"],[30,350,"Regular"],[20,360,"Regular"],[10,360,"Sports"],[20,365,"Regular"],[20,365,"Sports"],[10,370,"Sports"],[10,370,"Regular"],[20,375,"Regular"],[10,375,"Sports"],[20,380,"Regular"],[10,395,"Sports"]]
+\end{verbatim}
+\begin{alltt}
+\hlcom{## Convert the scores dataframe to JSON using the `toJSON()` function with the `pretty=TRUE` option}
+\hlkwd{toJSON}\hlstd{(}\hlkwc{x} \hlstd{= scores_df,} \hlkwc{dataframe} \hlstd{=} \hlstr{'values'}\hlstd{,} \hlkwc{pretty} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [
+##   [10, 200, "Sports"],
+##   [10, 205, "Sports"],
+##   [20, 235, "Sports"],
+##   [10, 240, "Sports"],
+##   [10, 250, "Sports"],
+##   [10, 265, "Regular"],
+##   [10, 275, "Regular"],
+##   [30, 285, "Sports"],
+##   [10, 295, "Regular"],
+##   [10, 300, "Regular"],
+##   [20, 300, "Sports"],
+##   [10, 305, "Sports"],
+##   [10, 305, "Regular"],
+##   [10, 310, "Regular"],
+##   [10, 310, "Sports"],
+##   [20, 320, "Regular"],
+##   [10, 305, "Regular"],
+##   [10, 315, "Sports"],
+##   [20, 320, "Regular"],
+##   [10, 325, "Regular"],
+##   [10, 325, "Sports"],
+##   [20, 330, "Regular"],
+##   [10, 330, "Sports"],
+##   [30, 335, "Sports"],
+##   [10, 335, "Regular"],
+##   [20, 340, "Regular"],
+##   [10, 340, "Sports"],
+##   [30, 350, "Regular"],
+##   [20, 360, "Regular"],
+##   [10, 360, "Sports"],
+##   [20, 365, "Regular"],
+##   [20, 365, "Sports"],
+##   [10, 370, "Sports"],
+##   [10, 370, "Regular"],
+##   [20, 375, "Regular"],
+##   [10, 375, "Sports"],
+##   [20, 380, "Regular"],
+##   [10, 395, "Sports"]
+## ]
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+The R session information (including the OS info, R version and all
+packages used):
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{sessionInfo}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## R version 4.3.0 (2023-04-21 ucrt)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 19045)
+## 
+## Matrix products: default
+## 
+## 
+## locale:
+## [1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8   
+## [3] LC_MONETARY=English_United States.utf8 LC_NUMERIC=C                          
+## [5] LC_TIME=English_United States.utf8    
+## 
+## time zone: America/Chicago
+## tzcode source: internal
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] jsonlite_1.8.5 RSQLite_2.3.1  DBI_1.1.3      readxl_1.4.2   tinytex_0.45  
+## [6] knitr_1.43    
+## 
+## loaded via a namespace (and not attached):
+##  [1] vctrs_0.6.2      cli_3.6.1        rlang_1.1.1      xfun_0.39        highr_0.10      
+##  [6] glue_1.6.2       bit_4.0.5        fansi_1.0.4      cellranger_1.1.0 evaluate_0.21   
+## [11] tibble_3.2.1     fastmap_1.1.1    lifecycle_1.0.3  memoise_2.0.1    compiler_4.3.0  
+## [16] blob_1.2.4       pkgconfig_2.0.3  utf8_1.2.3       pillar_1.9.0     magrittr_2.0.3  
+## [21] tools_4.3.0      bit64_4.0.5      cachem_1.0.8
+\end{verbatim}
+\begin{alltt}
+\hlkwd{Sys.time}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## [1] "2023-06-13 21:06:45 CDT"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\end{document}
