@@ -3,6 +3,7 @@ library(ggplot2)
 library(readr)
 library(readxl)
 library(dplyr)
+library(scales)
 source_Url <- "http://content.bellevue.edu/cst/dsc/520/id/resources/10-week-housing-data/week-6-housing.xlsx"
 download.file(url=source_Url, destfile = 'data/exercisedata.xlsx', method='curl')
 housing <- read_excel('data/exercisedata.xlsx')
@@ -21,7 +22,8 @@ Count_by_sales_room <- summarize(Housing_by_zip_bedroom, count = n())
 Count_by_sales_room_avg <-summarize(Housing_by_zip_bedroom,
                                     avg_price = mean(`Sale Price`)) 
 
+options(scipen = 999)
 ggplot(housing, aes(x=`Sale Price`)) +geom_histogram() +facet_wrap(~bedrooms)+
 ggtitle("Sales Historgram per beedroom") + xlab("Bedrooms") +ylab("Sale Price")
-ggplot(housing, aes(x=bedrooms, y=`Sale Price`)) + geom_point() 
-ggplot(housing, aes(x=`Sale Price`)) +geom_histogram()
+ggplot(housing, aes(x=bedrooms, y=`Sale Price`)) + geom_point() + scale_y_continuous(labels = scales::label_number_si())
+ggplot(housing, aes(x=`Sale Price`)) +geom_histogram() + scale_y_continuous(labels = scales::label_number_si())
