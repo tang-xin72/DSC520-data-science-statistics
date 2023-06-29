@@ -1,6 +1,0 @@
-variable naming for coding
-
-https://www.youtube.com/watch?v=-J3wNP6u5YU
-
-Rstudio cheat sheet
-https://rstudio.github.io/cheatsheets/html/rstudio-ide.html
