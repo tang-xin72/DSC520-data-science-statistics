@@ -1,0 +1,6 @@
+install.packages("hflights")
+install.packages("writexl")
+library("hflights")
+getwd()
+library("writexl")
+write_xlsx(hflights,"hflights.xlsx")

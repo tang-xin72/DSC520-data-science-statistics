@@ -1,0 +1,265 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[sc]{mathpazo}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+\hypersetup{
+ pdfstartview={XYZ null null 1}}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+
+\makeatother
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+
+
+\title{}
+
+
+
+\maketitle
+The results below are generated from an R script.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{setwd}\hlstd{(}\hlstr{'~/Dsc520'}\hlstd{)}
+\hlkwd{library}\hlstd{(readr)}
+\hlkwd{library}\hlstd{(readxl)}
+\hlkwd{library}\hlstd{(dplyr)}
+\hlkwd{library}\hlstd{(utils)}
+\hlkwd{library}\hlstd{(purrr)}
+\hlkwd{library}\hlstd{(tidyverse)}
+
+\hlstd{source_Url} \hlkwb{<-} \hlstr{"http://content.bellevue.edu/cst/dsc/520/id/resources/10-week-housing-data/week-6-housing.xlsx"}
+\hlkwd{download.file}\hlstd{(}\hlkwc{url}\hlstd{=source_Url,} \hlkwc{destfile} \hlstd{=} \hlstr{'data/exercisedata.xlsx'}\hlstd{,} \hlkwc{method}\hlstd{=}\hlstr{'curl'}\hlstd{)}
+\hlstd{housing} \hlkwb{<-} \hlkwd{read_excel}\hlstd{(}\hlstr{'data/exercisedata.xlsx'}\hlstd{)}
+\hlcom{#head(housing)}
+\hlcom{#str(housing)}
+\hlkwd{View}\hlstd{(housing)}
+
+\hlcom{#dplyr package}
+\hlcom{#using summarise()}
+\hlstd{Total_sales} \hlkwb{<-} \hlstd{housing} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{total_sales} \hlstd{=} \hlkwd{sum}\hlstd{(`Sale Price`))}
+\hlstd{Total_sales}
+\end{alltt}
+\begin{verbatim}
+## # A tibble: 1 x 1
+##   total_sales
+##         <dbl>
+## 1  8500391149
+\end{verbatim}
+\begin{alltt}
+\hlcom{#using groupby()}
+\hlstd{Total_sales_zip} \hlkwb{<-} \hlstd{housing} \hlopt{%>%} \hlkwd{group_by}\hlstd{(zip5)} \hlopt{%>%} \hlkwd{summarise}\hlstd{(}\hlkwc{Total_sales} \hlstd{=}\hlkwd{sum}\hlstd{(`Sale Price`))}
+\hlkwd{View}\hlstd{(Total_sales_zip)}
+
+\hlcom{#using select}
+\hlstd{Housing_sales_zip_bedroom_sqft} \hlkwb{<-} \hlstd{housing} \hlopt{%>%}
+  \hlkwd{select}\hlstd{(`Sale Price`,zip5, bedrooms, square_feet_total_living)}
+\hlkwd{View}\hlstd{(Housing_sales_zip_bedroom_sqft)}
+
+\hlcom{#using mutate()}
+\hlstd{new_housing_byK} \hlkwb{<-} \hlstd{Housing_sales_zip_bedroom_sqft} \hlopt{%>%}
+  \hlkwd{mutate}\hlstd{(}\hlkwc{price_in_K} \hlstd{= `Sale Price`} \hlopt{/} \hlnum{1000}\hlstd{)}
+\hlkwd{View}\hlstd{(new_housing_byK)}
+
+\hlcom{#using filter()}
+\hlstd{housing_byK_expensive} \hlkwb{<-} \hlstd{new_housing_byK} \hlopt{%>%} \hlkwd{filter}\hlstd{(price_in_K} \hlopt{>} \hlnum{300}\hlstd{)}
+\hlkwd{View}\hlstd{(housing_byK_expensive)}
+
+\hlcom{#using arrange()}
+\hlstd{housing_sorted_98052} \hlkwb{<-} \hlstd{Housing_sales_zip_bedroom_sqft} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(zip5} \hlopt{==} \hlnum{98052}\hlstd{)} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(bedrooms}\hlopt{!=} \hlnum{0}\hlstd{)} \hlopt{%>%}
+  \hlkwd{arrange}\hlstd{(}\hlkwd{desc}\hlstd{(`Sale Price`))}
+\hlkwd{View}\hlstd{(housing_sorted_98052)}
+
+\hlstd{housing_sorted_98053} \hlkwb{<-} \hlstd{Housing_sales_zip_bedroom_sqft} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(zip5} \hlopt{==} \hlnum{98053}\hlstd{)} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(bedrooms}\hlopt{!=} \hlnum{0}\hlstd{)} \hlopt{%>%}
+  \hlkwd{arrange}\hlstd{(}\hlkwd{desc}\hlstd{(`Sale Price`))}
+\hlkwd{View}\hlstd{(housing_sorted_98053)}
+
+\hlcom{#Purrr package function}
+\hlcom{#using keep()}
+\hlstd{Top_sale} \hlkwb{<-} \hlstd{Total_sales_zip} \hlopt{%>%}
+  \hlkwd{map}\hlstd{(sample,} \hlnum{3}\hlstd{)} \hlopt{%>%}
+  \hlkwd{keep}\hlstd{(}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{mean}\hlstd{(x)} \hlopt{>} \hlnum{1000000}\hlstd{)}
+\hlstd{Top_sale}
+\end{alltt}
+\begin{verbatim}
+## $Total_sales
+## [1]   69462700 4839145476     645000
+\end{verbatim}
+\begin{alltt}
+\hlstd{Top_sale2} \hlkwb{<-} \hlstd{Total_sales_zip} \hlopt{%>%}
+  \hlkwd{map}\hlstd{(sample,} \hlnum{3}\hlstd{)} \hlopt{%>%}
+  \hlkwd{discard}\hlstd{(}\hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)} \hlkwd{mean}\hlstd{(x)} \hlopt{<} \hlnum{1000000}\hlstd{)}
+\hlstd{Top_sale}
+\end{alltt}
+\begin{verbatim}
+## $Total_sales
+## [1]   69462700 4839145476     645000
+\end{verbatim}
+\begin{alltt}
+\hlcom{#create subset }
+\hlstd{Bighouse_98053_4bed} \hlkwb{<-} \hlstd{Housing_sales_zip_bedroom_sqft} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(zip5} \hlopt{==} \hlnum{98053}\hlstd{)} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(bedrooms} \hlopt{==} \hlnum{4} \hlopt{&} \hlstd{square_feet_total_living} \hlopt{>} \hlnum{7000}\hlstd{)} \hlopt{%>%}
+  \hlkwd{arrange}\hlstd{(}\hlkwd{desc}\hlstd{(`Sale Price`))}
+\hlkwd{View}\hlstd{(Bighouse_98053_4bed)}
+
+\hlstd{Bighouse_98053_3bed} \hlkwb{<-} \hlstd{Housing_sales_zip_bedroom_sqft} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(zip5} \hlopt{==} \hlnum{98053}\hlstd{)} \hlopt{%>%}
+  \hlkwd{filter}\hlstd{(bedrooms} \hlopt{==} \hlnum{3} \hlopt{&} \hlstd{square_feet_total_living} \hlopt{>} \hlnum{7000}\hlstd{)} \hlopt{%>%}
+  \hlkwd{arrange}\hlstd{(}\hlkwd{desc}\hlstd{(`Sale Price`))}
+\hlkwd{View}\hlstd{(Bighouse_98053_3bed)}
+
+\hlcom{#using cbind(0)}
+\hlstd{Sale_price_98053_4bed} \hlkwb{<-} \hlstd{Bighouse_98053_4bed[}\hlnum{1}\hlstd{]}
+\hlstd{Sqft_98053_4bed} \hlkwb{<-} \hlstd{Bighouse_98053_4bed[}\hlnum{4}\hlstd{]}
+\hlstd{Bighouse_98053} \hlkwb{<-} \hlkwd{cbind}\hlstd{(Sale_price_98053_4bed, Sqft_98053_4bed)}
+\hlcom{#View(Bighouse_98053)}
+
+\hlcom{#using rbind()}
+\hlstd{Copy_98053} \hlkwb{<-} \hlstd{Bighouse_98053}
+\hlcom{#View(Copy_98053)}
+\hlstd{duplicate} \hlkwb{<-} \hlkwd{rbind}\hlstd{(Bighouse_98053, Copy_98053)}
+\hlcom{#View(duplicate)}
+
+\hlcom{#split strings and concatenate it back}
+\hlstd{sentence} \hlkwb{<-} \hlstr{"Four score and seven years ago our fathers brought forth on this continent"}
+
+\hlstd{c} \hlkwb{<-} \hlkwd{unlist}\hlstd{(}\hlkwd{strsplit}\hlstd{(sentence,}\hlstr{" "}\hlstd{))}
+\hlkwd{print}\hlstd{(c)}
+\end{alltt}
+\begin{verbatim}
+##  [1] "Four"      "score"     "and"       "seven"     "years"     "ago"       "our"      
+##  [8] "fathers"   "brought"   "forth"     "on"        "this"      "continent"
+\end{verbatim}
+\begin{alltt}
+\hlstd{new_string} \hlkwb{=} \hlkwd{paste}\hlstd{(c,} \hlkwc{collapse} \hlstd{=} \hlstr{' '}\hlstd{)}
+\hlkwd{print}\hlstd{(new_string,} \hlkwc{quote} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] Four score and seven years ago our fathers brought forth on this continent
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+The R session information (including the OS info, R version and all
+packages used):
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{sessionInfo}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## R version 4.3.1 (2023-06-16 ucrt)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 19045)
+## 
+## Matrix products: default
+## 
+## 
+## locale:
+## [1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8   
+## [3] LC_MONETARY=English_United States.utf8 LC_NUMERIC=C                          
+## [5] LC_TIME=English_United States.utf8    
+## 
+## time zone: America/Chicago
+## tzcode source: internal
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] knitr_1.43      tinytex_0.45    readxl_1.4.2    lubridate_1.9.2 forcats_1.0.0  
+##  [6] stringr_1.5.0   dplyr_1.1.2     purrr_1.0.1     readr_2.1.4     tidyr_1.3.0    
+## [11] tibble_3.2.1    ggplot2_3.4.2   tidyverse_2.0.0
+## 
+## loaded via a namespace (and not attached):
+##  [1] gtable_0.3.3     highr_0.10       compiler_4.3.1   tidyselect_1.2.0 scales_1.2.1    
+##  [6] R6_2.5.1         generics_0.1.3   munsell_0.5.0    pillar_1.9.0     tzdb_0.4.0      
+## [11] rlang_1.1.1      utf8_1.2.3       stringi_1.7.12   xfun_0.39        timechange_0.2.0
+## [16] cli_3.6.1        withr_2.5.0      magrittr_2.0.3   grid_4.3.1       rstudioapi_0.14 
+## [21] hms_1.1.3        lifecycle_1.0.3  vctrs_0.6.2      evaluate_0.21    glue_1.6.2      
+## [26] cellranger_1.1.0 fansi_1.0.4      colorspace_2.1-0 tools_4.3.1      pkgconfig_2.0.3
+\end{verbatim}
+\begin{alltt}
+\hlkwd{Sys.time}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## [1] "2023-07-04 19:29:11 CDT"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\end{document}
