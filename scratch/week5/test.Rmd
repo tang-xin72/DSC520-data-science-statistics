@@ -1,0 +1,43 @@
+---
+Hello, this is a text
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Assignment wk5
+# Name: Xin Tang
+# Date: July-06-2023
+
+** package loaded: readxl, tidyverse, purrr*,**
+
+ week5 is to practice data transformation by using dplyr and purrr inside tidyverse
+ 
+```{r}
+setwd('~/Dsc520')
+library(readr)
+library(readxl)
+library(dplyr)
+library(utils)
+library(purrr)
+library(tidyverse)
+
+#source_Url <- "http://content.bellevue.edu/cst/dsc/520/id/resources/10-week-housing-data/week-6-housing.xlsx"
+#download.file(url=source_Url, destfile = 'data/exercisedata.xlsx', method='curl')
+housing <- read_excel('data/exercisedata.xlsx')
+#head(housing)
+#str(housing)
+#View(housing)
+
+#dplyr package
+#using summarise()
+Total_sales <- housing %>% summarise(total_sales = sum(`Sale Price`))
+Total_sales
+
+#using groupby()
+Total_sales_zip <- housing %>% group_by(zip5) %>% summarise(Total_sales =sum(`Sale Price`))
+#View(Total_sales_zip)
+```
+ 
+ 
