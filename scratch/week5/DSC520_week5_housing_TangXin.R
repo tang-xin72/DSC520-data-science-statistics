@@ -6,8 +6,8 @@ library(utils)
 library(purrr)
 library(tidyverse)
 
-source_Url <- "http://content.bellevue.edu/cst/dsc/520/id/resources/10-week-housing-data/week-6-housing.xlsx"
-download.file(url=source_Url, destfile = 'data/exercisedata.xlsx', method='curl')
+#source_Url <- "http://content.bellevue.edu/cst/dsc/520/id/resources/10-week-housing-data/week-6-housing.xlsx"
+#download.file(url=source_Url, destfile = 'data/exercisedata.xlsx', method='curl')
 housing <- read_excel('data/exercisedata.xlsx')
 #head(housing)
 #str(housing)
@@ -95,3 +95,20 @@ print(c)
 
 new_string = paste(c, collapse = ' ')
 print(new_string, quote = FALSE)
+
+#split string in a column and combine them back
+#create a new data frame
+short_housing <- housing %>% 
+  select(`Sale Price`,zip5, bedrooms, square_feet_total_living, addr_full)
+
+#split address string in addr_full into 2 new columns, delete addr_full column
+short_housing[c('st_number', 'address')] <- str_split_fixed(short_housing$addr_full, ' ', 2)
+new_housing <- short_housing %>% select(-c('addr_full'))
+
+#paste it back
+new_housing$full <- paste(new_housing$st_number, new_housing$address, sep=" ")
+#View(new_housing)
+
+#remove the 2 new columns created before
+back_housing <- new_housing %>% select(-c('address','st_number'))
+#View(back_housing)

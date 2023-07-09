@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.6.29)  4 JUL 2023 19:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.6.29)  9 JUL 2023 11:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**DSC520_week5_housing_tangXin.tex
+**DSC520_week5_housing_TangXin.tex
 (./DSC520_week5_housing_tangXin.tex
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-06-16>
@@ -93,7 +93,7 @@ Package: iftex 2022/02/03 v1.0f TeX engine tests
 \Gm@layoutvoffset=\dimen154
 \Gm@dimlist=\toks18
 ) (c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2023-06-25 v7.01a Hypertext links for LaTeX
+Package: hyperref 2023-07-08 v7.01b Hypertext links for LaTeX
 (c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 ) (c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
@@ -117,7 +117,7 @@ Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 ) (c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 ) (c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2023-06-18 v2.52 Cross-referencing by name of section
+Package: nameref 2023-08-07 v2.53 Cross-referencing by name of section
 (c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
@@ -134,7 +134,7 @@ Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 \Hy@linkcounter=\count198
 \Hy@pagecounter=\count199
 (c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2023-06-25 v7.01a Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2023-07-08 v7.01b Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 ) (c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
@@ -142,7 +142,7 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
 \Hy@SavedSpaceFactor=\count266
 (c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2023-06-25 v7.01a Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2023-07-08 v7.01b Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
@@ -192,7 +192,7 @@ package with kernel methods
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2023-06-25 v7.01a Hyperref driver for pdfTeX
+File: hpdftex.def 2023-07-08 v7.01b Hyperref driver for pdfTeX
 (c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
@@ -282,63 +282,30 @@ Package hyperref Info: Link coloring OFF on input line 76.
 \@outlinefile=\write3
 \openout3 = `DSC520_week5_housing_tangXin.out'.
 
-LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 85.
-(c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ot1pplx.fd
-File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
-)
-LaTeX Font Info:    Trying to load font information for OML+zplm on input line 85.
-(c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/omlzplm.fd
-File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
-)
-LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 85.
-(c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/omszplm.fd
-File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
-)
-LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 85.
-(c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/omxzplm.fd
-File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
-)
-LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 85.
-(c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ot1zplm.fd
-File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
-)
-
-LaTeX Warning: No \author given.
-
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 89.
 (c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 90.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 91.
 
-Overfull \hbox (100.2171pt too wide) in paragraph at lines 98--98
-[][]\T1/lmtt/m/n/10 source_Url[] []<-[] []"http://content.bellevue.edu/cst/dsc/520/id/resources/10-week-housing-data/week-6-housing.xlsx"[][] 
+Overfull \hbox (107.2032pt too wide) in paragraph at lines 98--98
+[][]\T1/lmtt/m/it/10 #source_Url <- "http://content.bellevue.edu/cst/dsc/520/id/resources/10-week-housing-data/week-6-housing.xlsx"[][] 
  []
 
 
-Overfull \hbox (5.71738pt too wide) in paragraph at lines 118--118
+Overfull \hbox (5.71738pt too wide) in paragraph at lines 122--122
 [][]\T1/lmtt/m/n/10 Total_sales_zip[] []<-[] []housing[] []%>%[] []\T1/lmtt/b/n/10 group_by[][]\T1/lmtt/m/n/10 (zip5)[] []%>%[] []\T1/lmtt/b/n/10 summarise[][]\T1/lmtt/m/n/10 ([][]Total_sales[] []=[][]\T1/lmtt/b/n/10 sum[][]\T1/lmtt/m/n/10 (`Sale Price`))[][] 
+ []
+
+
+Overfull \hbox (10.96736pt too wide) in paragraph at lines 223--223
+[][]\T1/lmtt/m/n/10 short_housing[[][]\T1/lmtt/b/n/10 c[][]\T1/lmtt/m/n/10 ([][]'st_number'[][],[] []'address'[][])][] []<-[] []\T1/lmtt/b/n/10 str_split_fixed[][]\T1/lmtt/m/n/10 (short_housing[][]$[][]addr_full,[] []' '[][],[] []2[][])[][] 
  []
 
 [1
 
-{c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}] [2]
-Overfull \hbox (10.96736pt too wide) in paragraph at lines 254--254
-[]\T1/lmtt/m/n/10 ## [11] rlang_1.1.1      utf8_1.2.3       stringi_1.7.12   xfun_0.39        timechange_0.2.0[] 
- []
-
-
-Overfull \hbox (5.71738pt too wide) in paragraph at lines 254--254
-[]\T1/lmtt/m/n/10 ## [16] cli_3.6.1        withr_2.5.0      magrittr_2.0.3   grid_4.3.1       rstudioapi_0.14[] 
- []
-
-
-Overfull \hbox (5.71738pt too wide) in paragraph at lines 254--254
-[]\T1/lmtt/m/n/10 ## [26] cellranger_1.1.0 fansi_1.0.4      colorspace_2.1-0 tools_4.3.1      pkgconfig_2.0.3[] 
- []
-
-[3] (./DSC520_week5_housing_tangXin.aux)
+{c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}] [2] [3] [4] (./DSC520_week5_housing_tangXin.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-06-16>
@@ -347,18 +314,18 @@ Package rerunfilecheck Info: File `DSC520_week5_housing_tangXin.out' has not cha
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 9558 strings out of 477682
- 149263 string characters out of 5829550
- 1874763 words of memory out of 5000000
- 29939 multiletter control sequences out of 15000+600000
- 527347 words of font info for 59 fonts, out of 8000000 for 9000
+ 9461 strings out of 477682
+ 147314 string characters out of 5829550
+ 1877763 words of memory out of 5000000
+ 29862 multiletter control sequences out of 15000+600000
+ 516973 words of font info for 40 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,6n,79p,272b,490s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,5n,79p,283b,487s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb><c:/Users/Daisy/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on DSC520_week5_housing_tangXin.pdf (3 pages, 100901 bytes).
+Output written on DSC520_week5_housing_tangXin.pdf (4 pages, 105942 bytes).
 PDF statistics:
- 43 PDF objects out of 1000 (max. 8388607)
- 29 compressed objects within 1 object stream
- 4 named destinations out of 1000 (max. 500000)
+ 47 PDF objects out of 1000 (max. 8388607)
+ 32 compressed objects within 1 object stream
+ 5 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
