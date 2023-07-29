@@ -1,0 +1,321 @@
+---
+title: "Week 8 housing study"
+author: "Xin TANG"
+date: '2023-07-27'
+output:
+  pdf_document: default
+  
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Simple and Multiple Regression: housing analysis
+
+## Explain any transformations or modifications you made to the dataset
+
+The data have some problems, some of which I have no skills to handle,
+like the scale variations of the sales price comparing to other
+variables, how to handle zip code from being used as numbers, some
+un-reasonbale data etc. for some I have skills to handle, I did:
+
+1.  remove any column with NA value
+2.  Some columns are not very useful like longitude and latitude.
+3.  Some columns had same values or meaning, like city names 4, Later
+    after review the data, data related to zip code = 780959 removed
+    since it is a single sales
+4.  changed name for some columns to reduce typing. like Sale Price -\>
+    SP
+
+## Create two variables; one that will contain the variables Sale Price and Square Foot of Lot (same variables used from previous assignment on simple regression) and one that will contain Sale Price and several additional predictors of your choice. Explain the basis for your additional predictor selections.
+
+1.  variable #1: 'simple_data' to do sale price vs square foot of lot
+    regression variable
+2.  variable #2: 'multiple_data', then to 'multi' to do regression based
+    on
+
+by looking at sales distribution. *zip code* is important, *bedrooms*
+and *year built* are normally important factor when buying houses. also
+after simple regression, I believe *living size* is more important than
+lot size.
+
+# Inline Code
+
+```{r, include=FALSE}
+setwd('~/Dsc520')
+library(readr)
+library(readxl)
+library(writexl)
+library(dplyr)
+library(utils)
+library(purrr)
+library(ggplot2)
+library(lm.beta)
+library(tidyverse)
+library(coefplot)
+library(car)
+library(zoom)
+
+source_Url <- "http://content.bellevue.edu/cst/dsc/520/id/resources/10-week-housing-data/week-6-housing.xlsx"
+download.file(url=source_Url, destfile = 'data/datawk8.xlsx', method='curl')
+datawk8 <- read_excel('data/datawk8.xlsx')
+
+#data transformation
+housing <- datawk8 %>% select(`Sale Price`,zip5, postalctyn, bedrooms, square_feet_total_living, year_built, sq_ft_lot)
+
+#visualize data, looks like zip 98059 only have one sale, so I plan to remove it
+ggplot(data = housing) + geom_point(mapping = aes(x = zip5, y = `Sale Price`, alpha = bedrooms))
+
+#remove sale in zip = 98059
+
+housing <- housing %>% filter(zip5 != 98059)
+
+#count sales in each zipcode
+Sales_count <- housing %>% summarize(`Sale Pice` =n())
+sales_count_by_zip <- housing %>% group_by(zip5) %>% summarize(`Sale Price` =n())
+
+
+```
+
+## Execute a summary() function on two variables, what R\^2 and Adjusted R2. Explain what these results tell you about the overall model.
+
+for simple regression: R\^2 =0.014, Adjusted R\^2 =0.014
+
+For multiple regression: R\^2 =0.219, Adjusted R\^2 =0.219
+
+Both model have good T value and P value. also they are not great model
+from standard derivation and residual. from residual chart, looks like
+inclusion of out-liners does hurts the model. From the result, however,
+multiple regression is better since it has larger R^2^ and adjusted R\^2
+
+```{r, echo=FALSE}
+#simple linear regression, first create dataset, then do regression
+simple_data <- housing %>% select(`Sale Price`, sq_ft_lot)
+simple_lm <- lm(formula = `Sale Price` ~ sq_ft_lot, data = simple_data)
+summary(simple_lm)
+
+#prediction
+sale_predict_df <- data.frame(sale = predict(simple_lm, newdata = simple_data), sq_ft_lot = simple_data$sq_ft_lot)
+#View(sale_predict_df)
+#write_xlsx(sale_predict_df,'data/predict.xlsx')
+
+#calculate R and R^2
+mean_sale <- mean(simple_data$`Sale Price`)
+## Corrected Sum of Squares Total
+sst <- sum((mean_sale - simple_data$`Sale Price`)^2)
+## Corrected Sum of Squares for Model
+ssm <- sum((mean_sale - sale_predict_df$sale)^2)
+
+## Residuals
+residuals <- simple_data$`Sale Price` - sale_predict_df$sale
+## Sum of Squares for Error
+sse <- sum(residuals^2)
+## R Squared R^2 = SSM\SST
+r_squared <- ssm/sst
+
+# n and p
+n <- nrow(simple_data)
+p <- 2
+
+adjusted_r_squared <- 1 - (1 - r_squared)*(n - 1) / (n - p)
+
+##begin of multiple regression
+multiple_data <- housing %>% select(`Sale Price`, zip5, square_feet_total_living, bedrooms, year_built)
+multi <- multiple_data %>% mutate(price_per_ft = `Sale Price` / square_feet_total_living)
+colnames(multi)[1] <- "SP"
+colnames(multi)[3] <- "live_size"
+
+#visual the data from price per foot angle, look like zip=98074 may also an outliner
+ggplot(multi, aes(x = price_per_ft, fill = zip5)) +
+  geom_histogram(binwidth = 10) + labs(x = 'price per foot') +
+  facet_wrap(~zip5)
+
+#visualize the data from price per foot and living area size. 
+ggplot(multi, aes(x=log(live_size), y=(price_per_ft)))+geom_point()
+ggplot(multi, aes(x=log(live_size), y=log(price_per_ft)))+geom_point()
+
+multi1 <- lm(SP ~ scale(live_size) + zip5 + bedrooms + year_built, data = multi)
+summary(multi1)
+
+#make prediction
+m_predict1_df <- data.frame(sale = predict(multi1, newdata = multi), zip = multi$zip5, live_size = multi$live_size,
+                           bed = multi$bedrooms, year = multi$year_built)
+
+View(m_predict1_df)
+
+#calculate R^2 and adjusted R^2
+mean_sale2 <- mean(multi$SP)
+
+sst <- sum((mean_sale2 - multi$SP)^2)
+
+ssm <- sum((mean_sale2 - m_predict1_df$sale)^2)
+
+residuals <- multi$SP - m_predict1_df$sale
+
+sse <- sum(residuals^2)
+
+r_squared <- ssm/sst
+
+
+```
+
+## Considering the parameters of the multiple regression model you have created. What are the standardized betas for each parameter and what do the values indicate?
+
+from the below bata value, looks like *live_size* is most influential,
+bedroom has a negative impact to sale price. (Intercept)
+scale(live_size) zip5 bedrooms year_built NA 0.435876021 0.006762363
+-0.026408416 0.108774496
+
+```{r, echo=FALSE}
+lm.beta(multi1) 
+
+```
+
+## Calculate the confidence intervals for the parameters in your model and explain what the results indicate.
+
+Confidence interval = coefficient +/- T value \*std error looks all
+variable had a large range, which may means we do not have a good
+model. 1. Live size: 2.8--352531 2. zip5: 0.4--3229 3. bedroom:
+-0.5--(-24377) 4. year built: 5108--2.3
+
+also see chart.
+
+```{r}
+coefficients(multi1)
+coefplot(multi1)
+```
+
+## performing an analysis of variance (ANOVA) and compare models.
+
+the simple model has F avlue of 187, R\^2 as 0.006 the multiple model
+has F value of 901. R\^2 as 0.21 so it is a better model.
+
+## Perform casewise diagnostics to identify outliers and/or influential cases,
+
+from the histogram chart, it shows any sales \>\$2M are outliners. sales
+between \$500K and \$1M are influential cases the result is store in
+variable *outliner* and *influencer*
+
+```{r, echo=FALSE}
+options(scipen = 999)
+ggplot(multi) +
+  aes(x = SP) +
+  geom_histogram(bins = 30L, fill = "#0c4c8a") +
+  theme_minimal()
+
+outliner <- multi %>% filter(SP > 200000)
+influencer <- multi %>% filter(SP > 500000 & SP < 1000000)
+```
+
+## Calculate the standardized residuals using the appropriate command, specifying those that are +-2, storing the results of large residuals in a variable you create.Use the appropriate function to show the sum of large residuals. Which specific variables have large residuals (only cases that evaluate as TRUE)?
+
+see the scatter chart and histogram of residuals.the large residual was
+in daat frame of each model with a flag of **out**. the sum of large
+residuals from 2 models are store in variables: sum_large_SD_multi and
+sum_large_SD_simple. from the sum result, the simple regression has
+large sum of residuals
+
+```{r, echo=FALSE}
+multi$SD_residual <- rstandard(multi1)
+plot(fitted(multi1), multi$SD_residual)
+#multi$out = ifelse(abs(standard_res_multi1)> 2, 1, 0)
+multi$out = ifelse(abs(multi$SD_residual)> 2, 1, 0)
+plot(multi$SD_residual, col = multi$out+1, pch=16,ylim=c(-5,10))
+ggplot(data = multi, aes(x = multi$SD_residual)) +
+  geom_histogram(fill = 'steelblue', color = 'black') +
+  labs(title = 'Histogram of Residuals', x = 'Residuals', y = 'Frequency')
+
+#large_SD_multi <- multi$SD_residual
+sum_large_SD_multi <- multi %>% filter(out == 1) %>% summarize(sum(SD_residual))
+
+#residual from simple regression model
+simple_data$SD_res <- rstandard(simple_lm)
+plot(fitted(simple_lm), simple_data$SD_res)
+simple_data$out = ifelse(abs(simple_data$SD_res)> 2, 1, 0)
+plot(simple_data$SD_res, col = simple_data$out+1, pch=16,ylim=c(-4,10))
+ggplot(data = simple_data, aes(x = simple_data$SD_res)) +
+  geom_histogram(fill = 'yellow', color = 'black') +
+  labs(title = 'Histogram of Residuals', x = 'Residuals', y = 'Frequency')
+
+#large_SD_simple <- simple_data$SD_res
+sum_large_SD_simple <- simple_data %>% filter(out == 1) %>% summarize(sum(SD_res))
+View(sum_large_SD_simple)
+```
+
+## Investigate further by calculating the leverage, cooks distance, and covariance rations.
+
+From **cooks distance** calculation. for simple regression. an
+observation of a \$4.4M sale have strong influence.for multiple
+regression, an observation of a \$670K sale have strong influence.
+
+from **Leverage calculation**, for simple regression. observation #8376
+is most unique, for multiple regression, observation \# 7722 and 7683
+are most unique.
+
+for **covariance ratio**, it looks like the year built and living area
+size are closely positively related. At the same time, the bedroom count
+are also positively related to living area size. both seems reasonable.
+
+```{r, echo+FALSE}
+#calculate cooks distance
+cooks.distance(simple_lm)
+cooks.distance(simple_lm)[which.max(cooks.distance(simple_lm))]
+
+cooks.distance(multi1)
+cooks.distance(multi1)[which.max(cooks.distance(multi1))]
+
+#calculate leverage
+hats_simple <- as.data.frame(hatvalues(simple_lm))
+which(hatvalues(simple_lm)>0.05)
+
+
+hats_multi <- as.data.frame(hatvalues(multi1))
+which(hatvalues(multi1)>0.014)
+
+#calculate Covariance ratio
+cov_simple <- cov(housing$`Sale Price`, housing$sq_ft_lot)
+
+multi_new <- multi %>% select(1:5)
+Cov_multi <- cov(multi_new)
+
+
+```
+
+## Perform the necessary calculations to assess the assumption of independence
+
+from resulat of correlation calculation. 1. living size is correlated to
+sale price, which is understandable 2. living size is correlated to
+bedroom count, which is also reasonable 3. year built also correlated to
+sale price, which is also no surprise 4. year built also correlated to
+living size, which is reflect the common sense.
+
+```{r}
+cor(multi_new)
+```
+
+## Perform the necessary calculations to assess the assumption of no multicollinearity
+
+among the predictor I chose, none of them have factor \>5, so they are
+relatively independent.
+
+```{r}
+vif(multi1)
+```
+
+## Visually check the assumptions related to the residuals using the plot() and hist() functions
+
+**see chart above in residual analysis**. both model have long residual
+tail in historgam, which means there are many outliners. also the
+majority part of residual is normal shape, which may means the model
+works. from scatter chat, it is also clear that many outliners exists.
+
+## Overall, is this regression model unbiased? If an unbiased regression model, what does this tell us about the sample vs. the entire population model?
+
+from the residual analysis, most residual is relatively small and
+normally distributed. so I would conclude that the model is not biased.
+on the other hand, from the data, residual and outliner analysis, there
+are many sales cases are outliner and can not be predicted well by
+current model.
+
+If I have more time and more skills to do it. I will seprated the zip
+code and remove sales with \>\$2M, it may create a better model to use.
