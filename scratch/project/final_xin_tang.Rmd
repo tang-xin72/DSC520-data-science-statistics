@@ -1,0 +1,236 @@
+---
+title: "DSC520 final"
+author: "xin tang"
+date: "`r Sys.Date()`"
+output: html_document
+output:
+  pdf_document: default
+bibliography: flight_citations.bib
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+## My home airport is Austin, Texas (AUS), due to work, I fly to bay area in California frequently. I can choose from 3 airprots to use: San Francisco airport (SFO), SanJose airport (SJC) and Oakland airport(OJC). I am interested to find how to pick the flight out and back flight to avoid delay, with least cancellation risk and possible best fare.I only studied direct flight since it will be most time saving options.
+
+### First I will do an analysis on delay using flight data.
+
+```{r, echo=FALSE}
+library(readr)
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(scales)
+setwd("~/dsc520")
+
+AUS_flight <- read_excel('scratch/project/aus-flight.xlsx', sheet ='Sheet1')
+
+AUS_Dep <- AUS_flight %>% filter(Origin == 'AUS')
+
+AUS_Avl <- AUS_flight %>% filter(Dest == 'AUS')
+
+delay_by_dest <- AUS_Dep %>% group_by(Dest) %>% filter(ArrDelay > 0) %>% summarize(delay_count=n())
+
+flight_by_dest <- group_by(AUS_Dep, Dest) %>% summarize(flight_count=n())
+
+df <- merge(x = delay_by_dest, y = flight_by_dest, by = "Dest")
+
+df_by_dest = mutate(df, delay_percent =delay_count / flight_count)
+df_by_dest$delay_percent <- scales::percent(df_by_dest$delay_percent)
+
+
+df_by_dest = mutate(df, delay_percent =delay_count / flight_count)
+df_by_dest$delay_percent <- scales::percent(df_by_dest$delay_percent)
+df_by_dest
+View(df_by_dest)
+ggplot(delay_by_dest, aes(x=Dest, y=delay_count)) + geom_bar(stat = "identity") + ggtitle("Destination airport vs. delay count") + xlab("To Airport") + ylab("Delayed flight count")
+
+```
+
+### Now analysis delay condition from those airports
+
+```{r, echo=FALSE}
+delay_by_origin <- group_by(AUS_Avl, Origin) %>% filter(ArrDelay > 0)%>% summarize(delay_count=n())
+
+flight_by_origin <- group_by(AUS_Avl, Origin) %>% summarize(flight_count=n())
+
+df <- merge(x = delay_by_origin, y = flight_by_origin, by = "Origin")
+df_by_origin = mutate(df, delay_percent =delay_count / flight_count)
+df_by_origin$delay_percent <- scales::percent(df_by_origin$delay_percent)
+df_by_origin
+
+```
+
+### From this analysis, no matter as Origin or Destinatino airport, OAK airport have twice as much delay as other 2 airports. so it is not a good choice to fly into
+
+### the rest analysis will not include OAK, since it is not a preferred place to fly to/from
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+
+### Now look at the delay from other 2 aspects( by daily and by airline).
+
+### looks like Friday may have more chances to delay but every Airline have similar chance of delay
+
+```{r, echo=FALSE, warning=FALSE}
+
+AUS_CA <- AUS_Dep %>% filter(Dest != 'OAK')
+CA_AUS <- AUS_Avl %>% filter(Origin != 'OAK')
+
+AUS_CA <- mutate(AUS_CA, true_delay = ArrDelay + DepDelay)
+CA_AUS <- mutate(CA_AUS, true_delay = ArrDelay + DepDelay)
+ggplot(data = CA_AUS) +
+  geom_point(mapping= aes(x = DayOfWeek, y = true_delay, color = Operating_Airline)) + ggtitle("Daily delay") + ylab("Delay in minutes") 
+
+
+ggplot(data = CA_AUS, mapping= aes(x = Operating_Airline, y = true_delay)) +
+  geom_boxplot() +ggtitle('Airline delay condition')
+
+```
+
+### Exclude early arrival, now answer the question: who may have least delay
+
+#### Airline OO (skywest) has least delay and rest are about same when fly into Austin.
+
+#### Airline UA (United) has worst delay when fly into bay area.
+
+#### Fly into and from SJC is always a good choice
+
+```{r, echo=FALSE}
+options(dplyr.summarise.inform = FALSE)
+
+Avl_inbound_delay_carrier <- CA_AUS %>%
+  group_by(Operating_Airline, Origin) %>% 
+  filter(true_delay > 0) %>% 
+  summarize( avg_delay = mean (true_delay))
+Avl_inbound_delay_carrier
+
+Outbound_delay_carrier <- AUS_CA %>%
+  group_by(Operating_Airline, Dest) %>% 
+  filter(true_delay > 0) %>% 
+  summarize( avg_delay = mean (true_delay))
+Outbound_delay_carrier
+
+```
+
+### Check which delay factor is the most significant when fly to bay area
+
+### it shows the prior flight delay and control tower caused most delay, which I can not control
+
+```{r, echo =FALSE}
+
+Inbound_delay_factor <- CA_AUS %>%
+  group_by(Origin) %>% 
+  filter(true_delay > 0) %>% 
+  summarize( carrier_delay = mean (CarrierDelay, na.rm = TRUE), weather_delay = mean(WeatherDelay, na.rm=TRUE), NAS_delay = mean(NASDelay, na.rm=TRUE), 
+             Security_delay = mean(SecurityDelay, na.rm=TRUE), late_arriv_Delay = mean(LateAircraftDelay, na.rm =TRUE))
+
+Inbound_delay_factor
+
+Outbound_delay_factor <- AUS_CA %>%
+  group_by(Dest) %>% 
+  filter(true_delay > 0) %>% 
+  summarize( carrier_delay = mean (CarrierDelay, na.rm = TRUE), weather_delay = mean(WeatherDelay, na.rm=TRUE), NAS_delay = mean(NASDelay, na.rm=TRUE), 
+             Security_delay = mean(SecurityDelay, na.rm=TRUE), late_arriv_Delay = mean(LateAircraftDelay, na.rm =TRUE))
+
+Outbound_delay_factor
+
+```
+
+### get histogram of delay, inbound and outbound each, check if there are normal distribution
+
+```{r, echo =FALSE, warning=FALSE}
+outbound_delay <- AUS_CA %>% group_by(Dest) %>% select(FlightDate, Dest, true_delay)
+
+ggplot(outbound_delay, aes(x=true_delay)) + 
+  geom_histogram(binwidth = 10) +
+  xlim(-50, 500) +
+  geom_density(alpha=.2, fill="#FF6666") + ggtitle('Austin Departure Delay') +xlab('delay in minutes')
+
+inbound_delay <- CA_AUS %>% group_by(Origin) %>% select(FlightDate, Dest, true_delay)
+
+ggplot(outbound_delay, aes(x = true_delay)) + 
+  geom_histogram(binwidth = 10) +
+  xlim(-50, 500) +
+  geom_density(alpha=.2)+ ggtitle('Austin Arrival Delay') +xlab('delay in minutes')
+
+```
+
+### now check correlation between flight time and different delay factors. using flight data 'Austin to SFO'
+
+Again the air control caused delay is more important factor
+
+```{r, echo=FALSE}
+SFO_inbound_delay <- CA_AUS %>% filter(Origin == 'SFO') %>% select(FlightDate, Origin, ActualElapsedTime, true_delay, CarrierDelay, WeatherDelay, NASDelay, LateAircraftDelay) 
+
+SFO_inbound_delay_clean <- SFO_inbound_delay%>% drop_na()
+
+cor(SFO_inbound_delay[, c('ActualElapsedTime','CarrierDelay', 'NASDelay', 'LateAircraftDelay')], use="complete.obs")
+cor(SFO_inbound_delay_clean$ActualElapsedTime, SFO_inbound_delay_clean$NASDelay, use = "everything", method = c("pearson", "kendall", "spearman"))
+cor(SFO_inbound_delay_clean$ActualElapsedTime, SFO_inbound_delay_clean$CarrierDelay, use = "everything", method = c("pearson", "kendall", "spearman"))
+cor(SFO_inbound_delay_clean$ActualElapsedTime, SFO_inbound_delay_clean$LateAircraftDelay, use = "everything", method = c("pearson", "kendall", "spearman"))
+
+```
+
+### now I want to look at cancellation data. Data is from Jan-2022 to April-2023
+
+#### first check monthly cancel rate, then check airline performance
+
+looks like month Jan'2022, Feb'2022 and Dec'2022 are outliners (we know it from News) Airline JetBlue, Southwest, Spirit and United have some bad records.
+
+```{r, echo=FALSE}
+setwd('~/Dsc520')
+cancel_data <- read_excel('./scratch/project/flight-cancelled.xlsx', sheet=3)
+cancel_data$Year <- as.factor(cancel_data$Year)
+cancel_data$Month_factor <- as.factor(cancel_data$Month_factor)
+cancel_data$cancel_rate <- cancel_data$cancel_rate*100
+
+ggplot(cancel_data, mapping = aes(x = Month_factor, y = cancel_rate, color = Airline)) + geom_point() +
+  ggtitle('monthly cancel rata') + xlab('month in order') + ylab('cancel rate in precentage')
+
+monthly_rate <- cancel_data %>% group_by(Month_factor) %>% summarize(Avg_rate = mean(cancel_rate))
+monthly_rate
+
+ggplot(cancel_data, mapping = aes(x = Airline, y = cancel_rate, color = Month_factor)) + geom_point() + ggtitle('Cancel by Airline') + theme(axis.text.x = element_text(angle = 90))
+
+```
+
+## Next remove outliner month and try to rank the best and worst airline in term of cancellation
+
+### Now looks like Hawaiian is the best, but it do not fly to Austin. the United airline looks better now, ranked #4.
+
+```{r, echo=FALSE}
+cancel_new <- cancel_data %>% filter(Month_factor != c(1,2,12))
+
+Avg_by_Airline <- cancel_new %>% group_by(Airline) %>% summarize(avg = mean(cancel_rate))
+Avg_by_Airline$avg <- scales::percent(Avg_by_Airline$avg)
+Avg_by_Airline
+
+```
+
+### Last, review the fare data. which contains fare info in whole year 2022
+
+#### looks like in Q4 ticket is the most expnsive, while Q1 is the cheapest
+
+```{r, echo=FALSE}
+setwd('~/Dsc520')
+fare_data <- read_excel('./scratch/project/price/price_clean.xlsx')
+
+#plot
+ggplot(fare_data, mapping = aes(x = Quarter, y = Adjusted_Average, color = Airport_Code)) + geom_point() +
+  ggtitle('Quarterly flight price per airport') + ylab('Average Ticket Price')
+
+#average
+Average_price  <-  fare_data %>% group_by(Airport_Code) %>% summarize(annual_average=mean(Adjusted_Average))
+Average_price$annual_average <- round(Average_price$annual_average, digits=2)
+#Average_price
+
+```
+
+## Conclusion
+
+### from Austin to Bay area and back. looks like taking skywest (now is called United Express) is likely had minimum delay and average risk of cancellation. the best airport to use is San Jose airport (SJC). Flying in Q1 is most likely to get cheap ticket.
+
+# References
+
+@Flight Dataset @bureau_of_transportation_statistics_quarterly_nodate @bureau_of_transportation_statistics_airline_nodate
