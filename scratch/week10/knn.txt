@@ -1,0 +1,8 @@
+**nearest neighbors algorithm**
+
+https://www.youtube.com/watch?v=lDCWX6vCLFA
+
+https://www.geeksforgeeks.org/k-nn-classifier-in-r-programming/
+
+**K means clustering**
+https://www.geeksforgeeks.org/k-means-clustering-in-r-programming/

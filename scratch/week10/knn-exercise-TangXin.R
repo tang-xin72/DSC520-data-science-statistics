@@ -1,0 +1,161 @@
+setwd('~/Dsc520')
+library(readr)
+library(writexl)
+library(dplyr)
+#library(caret)
+library(scales)
+library(class)
+library(ggplot2)
+library(clusterR)
+library(cluster)
+
+binary10 <- read.csv('http://content.bellevue.edu/cst/dsc/520/id/resources/binary-classifier-data.csv')
+str(binary10)
+View(binary10)
+
+norm <- function(x) {((x-min(x))/ (max(x)-min(x)))}
+bin10_norm <- as.data.frame(lapply(binary10[,-1], norm))
+View(bin10_norm)
+str(bin10_norm)
+
+
+bin10_train <- bin10_norm[1:1020,]
+bin10_test <- bin10_norm[1:1498,]
+str(bin10_test)
+
+#K=3
+bin_pred <- knn(bin10_train, bin10_test, binary10[1:1020, 1], k=3)
+try1 <- table(bin_pred, binary10[1:1498,1])
+accu1 = (try1[1,1]+try1[2,2])/sum(try1)
+print(paste(round(accu1, digits=3), "is the accuracy when k =3"))
+
+
+#k=5
+bin_pred2 <- knn(bin10_train, bin10_test, binary10[1:1020, 1], k=5)
+try2 <- table(bin_pred2, binary10[1:1498,1])
+accu2 = (try2[1,1]+try2[2,2])/sum(try2)
+print(paste(round(accu2, digits=3), "is the accuracy when k =25"))
+
+
+#k=10
+bin_pred3 <- knn(bin10_train, bin10_test, binary10[1:1020, 1], k=10)
+try3 <- table(bin_pred3, binary10[1:1498,1])
+accu3 = (try3[1,1]+try3[2,2])/sum(try3)
+print(paste(round(accu3, digits=3), "is the accuracy when k = 10"))
+
+
+#k=15
+bin_pred4 <- knn(bin10_train, bin10_test, binary10[1:1020, 1], k=15)
+try4 <- table(bin_pred4, binary10[1:1498,1])
+accu4 = (try4[1,1]+try4[2,2])/sum(try4)
+print(paste(round(accu4, digits=3), "is the accuracy when k = 10"))
+
+
+#K=20
+bin_pred5 <- knn(bin10_train, bin10_test, binary10[1:1020, 1], k=20)
+try5 <- table(bin_pred5, binary10[1:1498,1])
+accu5 = (try5[1,1]+try5[2,2])/sum(try5)
+print(paste(round(accu5, digits=3), "is the accuracy when k = 10"))
+
+
+#K=25
+bin_pred6 <- knn(bin10_train, bin10_test, binary10[1:1020, 1], k=25)
+try6 <- table(bin_pred6, binary10[1:1498,1])
+accu6 = (try6[1,1]+try6[2,2])/sum(try6)
+print(paste(round(accu6, digits=3), "is the accuracy when k = 10"))
+
+data1 <- data.frame(x1 = numeric(), 
+plot_data <- data.frame(Kvalue = c(3,5,10,15,20,25), accu = c(accu1, accu2, accu3, accu4, accu5, accu6))
+
+ggplot(plot_data, mapping = aes(x = Kvalue, y = accu)) + geom_point() +
+  ggtitle('prediction accuracy with various K') + 
+    xlab('K-value')+ xlim(1, 27)
+    ylab('Accuracy') +ylim(0.6, 0.75)
+    
+
+# begin of the cluster data analysis using K means clustering
+
+cluster10 <- read.csv('http://content.bellevue.edu/cst/dsc/520/id/resources/clustering-data.csv')
+
+#scatter plot of original data
+ggplot(cluster10, mapping = aes(x = y, y = y)) + geom_point() +
+  ggtitle('scratter chart of original data') + xlab('x')
+
+#K-means clustering 
+#using  k=2
+set.seed(240)
+km2 <- kmeans(cluster10, 2, nstart = 25)
+#View(km$centers)
+#cluster_km <- km$cluster
+
+#add cluster flag back to data set
+line_km2 <- mutate(cluster10, cluster = km2$cluster)
+
+#calculated average distance
+distance_km2 <- sqrt(rowSums((line_km2[, 1:2] - fitted(km2))^2))
+#View(distance_km)
+Average_km2 <- mean(distance_km2)
+
+ggplot(line_km2, aes(x=x, y=y, col = factor(cluster))) + geom_point()+ ggtitle('scratter chart of 2 clusters') + xlab('x')
+
+
+#using  k=4
+km4 <- kmeans(cluster10, 4, nstart = 25)
+
+line_km4 <- mutate(cluster10, cluster = km4$cluster)
+distance_km4 <- sqrt(rowSums((line_km4[, 1:2] - fitted(km4))^2))
+Average_km4 <- mean(distance_km4)
+
+ggplot(line_km4, aes(x=x, y=y, col =factor(cluster)))+geom_point()+ ggtitle('scratter chart of 4 clusters') + xlab('x')
+
+#using  k=6
+km6 <- kmeans(cluster10, 6, nstart = 25)
+
+line_km6 <- mutate(cluster10, cluster = km6$cluster)
+distance_km6 <- sqrt(rowSums((line_km6[, 1:2] - fitted(km6))^2))
+Average_km6 <- mean(distance_km6)
+
+ggplot(line_km6, aes(x=x, y=y, col =factor(cluster)))+geom_point()+ ggtitle('scratter chart of 6 clusters') + xlab('x')
+
+
+#using  k=8
+km8 <- kmeans(cluster10, 8, nstart = 25)
+
+line_km8 <- mutate(cluster10, cluster = km8$cluster)
+distance_km8 <- sqrt(rowSums((line_km8[, 1:2] - fitted(km8))^2))
+Average_km8 <- mean(distance_km8)
+
+ggplot(line_km8, aes(x=x, y=y, col =factor(cluster)))+geom_point()+ ggtitle('scratter chart of 8 clusters') + xlab('x')
+
+
+#using  k=10
+km10 <- kmeans(cluster10, 10, nstart = 25)
+
+line_km10 <- mutate(cluster10, cluster = km10$cluster)
+distance_km10 <- sqrt(rowSums((line_km10[, 1:2] - fitted(km10))^2))
+Average_km10 <- mean(distance_km10)
+
+ggplot(line_km10, aes(x=x, y=y, col =factor(cluster)))+geom_point()+ ggtitle('scratter chart of 10 clusters') + xlab('x') 
+
+#using  k=12
+km12 <- kmeans(cluster10, 12, nstart = 25)
+
+line_km12 <- mutate(cluster10, cluster = km12$cluster)
+distance_km12 <- sqrt(rowSums((line_km12[, 1:2] - fitted(km12))^2))
+Average_km12 <- mean(distance_km12)
+
+ggplot(line_km12, aes(x=x, y=y, col =factor(cluster)))+geom_point()+ ggtitle('scratter chart of 12 clusters') + xlab('x') 
+
+
+# comparison
+
+Line_plot_data <- data.frame(K_value = c(2,4,6,8,10,12), avg_distance = c(Average_km2 , Average_km4, Average_km6, Average_km8, Average_km10, Average_km12))
+
+ggplot(Line_plot_data, aes(x=K_value, y=avg_distance)) + geom_line( color = 'red') + geom_point() +xlim(1,13) + ggtitle('Avg Distance for different K')
+
+library(factoextra)
+fviz_nbclust(cluster10, kmeans, method = "wss")
+fviz_nbclust(cluster10, kmeans, method = "silhouette")
+#fviz_nbclust(cluster10, kmeans, method = "gap_stat")
+
+fviz_cluster(kmeans(cluster10, center=2,nstart=100), data=cluster10)
