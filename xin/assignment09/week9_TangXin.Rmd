@@ -1,0 +1,94 @@
+---
+title: "Week 9 Logical Regression"
+author: "Xin TANG"
+date: '2023-08-1'
+output:
+  pdf_document: default
+  
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Logical Regression: surgery and binary data
+
+## Surgery fit model
+
+working with the thoracic surgery data set
+
+1.  Fit a binary logistic regression model to the data set that predicts
+    whether or not the patient survived for one year (the Risk1Y
+    variable) after the surgery. include a summary()
+
+# Inline Code
+
+```{r, echo=FALSE}
+setwd('~/Dsc520')
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(coefplot)
+library(scales)
+
+# the surgery data
+surgery9 <- read.csv('./data/SurgeryData.csv')
+
+#first tried model with all parameters, then figured out the most relavalant predictor, using those to re-build the model. 
+
+Risk3 <- glm(Risk1Yr ~ PRE14 + PRE7 + PRE9 + PRE25, data = surgery9, family = binomial(link = 'logit'))
+coefplot(Risk3)
+summary(Risk3)
+
+```
+
+2.  From model and chart, the **PRE14** has greatest effect on the
+    survival rate
+
+3.  Compute the accuracy of your model, use the dataset to predict the
+    outcome variable.
+
+```{r, echo=FALSE}
+#prediction result
+predict_risk <- predict(Risk3, newdata = surgery9, type='response')
+
+matrix = table(actual = surgery9$Risk1Yr, predict = predict_risk>0.5)
+matrix
+accuracy1 = (matrix[1,1]/sum(matrix))
+accuracy1
+
+```
+
+The **accuracy** of the model is **85%**
+
+## Logical Regression model on binary data.
+
+1.  Fit a logistic regression model to the binary-classifier-data.csv
+    dataset
+
+```{r, echo=FALSE}
+
+binary9 <- read.csv('http://content.bellevue.edu/cst/dsc/520/id/resources/binary-classifier-data.csv')
+predict1 <- glm(label ~ x + y, data = binary9, family = binomial(link = 'logit'))
+coefplot(predict1)
+summary(predict1)
+
+```
+
+### What is the accuracy of the logistic regression classifier?
+
+```{r, echo=FALSE}
+
+#predict result
+predict_binary <- predict(predict1, newdata = binary9, type='response')
+
+matrix2 = table(actual =binary9$label, predict = predict_binary>0.5)
+matrix2
+
+accuracy_binary_model = (matrix2[1,1]+matrix2[2,2])/sum(matrix2)
+accuracy_binary_model
+
+```
+
+The **accuracy** of the model is **58%**
+
+## End of Markdown
