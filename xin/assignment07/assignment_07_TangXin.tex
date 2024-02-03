@@ -1,0 +1,459 @@
+<<<<<<< HEAD
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[sc]{mathpazo}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+\hypersetup{
+ pdfstartview={XYZ null null 1}}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+
+\makeatother
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+
+
+\title{\title{\title{\title{\title{\title{\title{\title{\title{\title{\title{\title{\title{}}}}}}}}}}}}}
+
+
+
+\maketitle
+The results below are generated from an R script.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Assignment: ASSIGNMENT 7}
+\hlcom{# Name: Tang, Xin}
+\hlcom{# Date: 2023-07-26}
+
+\hlcom{## Set the working directory to the root of your DSC 520 directory}
+\hlkwd{setwd}\hlstd{(}\hlstr{"~/dsc520"}\hlstd{)}
+
+\hlcom{## Load the `data/r4ds/heights.csv` to}
+\hlkwd{library}\hlstd{(ggplot2)}
+
+\hlcom{# Fit a linear model}
+\hlstd{earn_lm} \hlkwb{<-}  \hlkwd{lm}\hlstd{(earn} \hlopt{~} \hlstd{ed} \hlopt{+} \hlstd{race} \hlopt{+} \hlstd{height} \hlopt{+} \hlstd{age} \hlopt{+} \hlstd{sex,} \hlkwc{data} \hlstd{= heights_df)}
+
+\hlcom{# View the summary of your model}
+\hlkwd{summary}\hlstd{(earn_lm)}
+\end{alltt}
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = earn ~ ed + race + height + age + sex, data = heights_df)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -39423  -9827  -2208   6157 158723 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  -41478.4    12409.4  -3.342 0.000856 ***
+## ed             2768.4      209.9  13.190  < 2e-16 ***
+## racehispanic  -1414.3     2685.2  -0.527 0.598507    
+## raceother       371.0     3837.0   0.097 0.922983    
+## racewhite      2432.5     1723.9   1.411 0.158489    
+## height          202.5      185.6   1.091 0.275420    
+## age             178.3       32.2   5.537 3.78e-08 ***
+## sexmale       10325.6     1424.5   7.249 7.57e-13 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 17250 on 1184 degrees of freedom
+## Multiple R-squared:  0.2199,	Adjusted R-squared:  0.2153 
+## F-statistic: 47.68 on 7 and 1184 DF,  p-value: < 2.2e-16
+\end{verbatim}
+\begin{alltt}
+\hlstd{predicted_df} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}
+  \hlkwc{earn} \hlstd{=} \hlkwd{predict}\hlstd{(earn_lm,} \hlkwc{newdata} \hlstd{= heights_df),}
+  \hlkwc{ed}\hlstd{=heights_df}\hlopt{$}\hlstd{ed,} \hlkwc{race}\hlstd{=heights_df}\hlopt{$}\hlstd{race,} \hlkwc{height}\hlstd{=heights_df}\hlopt{$}\hlstd{height,}
+  \hlkwc{age}\hlstd{=heights_df}\hlopt{$}\hlstd{age,} \hlkwc{sex}\hlstd{=heights_df}\hlopt{$}\hlstd{sex}
+  \hlstd{)}
+\hlkwd{View}\hlstd{(predicted_df)}
+
+\hlcom{## Compute deviation (i.e. residuals)}
+\hlstd{mean_earn} \hlkwb{<-} \hlkwd{mean}\hlstd{(heights_df}\hlopt{$}\hlstd{earn)}
+\hlcom{## Corrected Sum of Squares Total}
+\hlstd{sst} \hlkwb{<-} \hlkwd{sum}\hlstd{((mean_earn} \hlopt{-} \hlstd{heights_df}\hlopt{$}\hlstd{earn)}\hlopt{^}\hlnum{2}\hlstd{)}
+\hlcom{## Corrected Sum of Squares for Model}
+\hlstd{ssm} \hlkwb{<-} \hlkwd{sum}\hlstd{((mean_earn} \hlopt{-} \hlstd{age_predict_df}\hlopt{$}\hlstd{earn)}\hlopt{^}\hlnum{2}\hlstd{)}
+\hlcom{## Residuals}
+\hlstd{residuals} \hlkwb{<-} \hlstd{heights_df}\hlopt{$}\hlstd{earn} \hlopt{-} \hlstd{age_predict_df}\hlopt{$}\hlstd{earn}
+\hlcom{## Sum of Squares for Error}
+\hlstd{sse} \hlkwb{<-} \hlkwd{sum}\hlstd{(residuals}\hlopt{^}\hlnum{2}\hlstd{)}
+\hlcom{## R Squared}
+\hlstd{r_squared} \hlkwb{<-} \hlstd{ssm}\hlopt{/}\hlstd{sst}
+
+\hlcom{## Number of observations}
+\hlstd{n} \hlkwb{<-} \hlkwd{nrow}\hlstd{(heights_df)}
+\hlcom{## Number of regression paramaters}
+\hlstd{p} \hlkwb{<-} \hlnum{8}
+\hlcom{## Corrected Degrees of Freedom for Model}
+\hlstd{dfm} \hlkwb{<-} \hlstd{p}\hlopt{-}\hlnum{1}
+\hlcom{## Degrees of Freedom for Error}
+\hlstd{dfe} \hlkwb{<-} \hlstd{n}\hlopt{-}\hlstd{p}
+\hlcom{## Corrected Degrees of Freedom Total:   DFT = n - 1}
+\hlstd{dft} \hlkwb{<-} \hlstd{n} \hlopt{-} \hlnum{1}
+
+\hlcom{## Mean of Squares for Model:   MSM = SSM / DFM}
+\hlstd{msm} \hlkwb{<-} \hlstd{ssm} \hlopt{/} \hlstd{dfm}
+\hlcom{## Mean of Squares for Error:   MSE = SSE / DFE}
+\hlstd{mse} \hlkwb{<-} \hlstd{sse} \hlopt{/} \hlstd{dfe}
+\hlcom{## Mean of Squares Total:   MST = SST / DFT}
+\hlstd{mst} \hlkwb{<-} \hlstd{sst} \hlopt{/} \hlstd{dft}
+\hlcom{## F Statistic}
+\hlstd{f_score} \hlkwb{<-} \hlstd{msm} \hlopt{/} \hlstd{mse}
+
+\hlcom{## Adjusted R Squared R2 = 1 - (1 - R2)(n - 1) / (n - p)}
+\hlstd{adjusted_r_squared} \hlkwb{<-} \hlnum{1} \hlopt{-} \hlstd{(}\hlnum{1} \hlopt{-} \hlstd{r_squared)}\hlopt{*}\hlstd{(n} \hlopt{-} \hlnum{1}\hlstd{)} \hlopt{/} \hlstd{(n} \hlopt{-} \hlstd{p)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+The R session information (including the OS info, R version and all
+packages used):
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{sessionInfo}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## R version 4.3.1 (2023-06-16 ucrt)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 19045)
+## 
+## Matrix products: default
+## 
+## 
+## locale:
+## [1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8   
+## [3] LC_MONETARY=English_United States.utf8 LC_NUMERIC=C                          
+## [5] LC_TIME=English_United States.utf8    
+## 
+## time zone: America/Chicago
+## tzcode source: internal
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] ggplot2_3.4.2
+## 
+## loaded via a namespace (and not attached):
+##  [1] vctrs_0.6.2      cli_3.6.1        knitr_1.43       rlang_1.1.1      xfun_0.39       
+##  [6] highr_0.10       generics_0.1.3   glue_1.6.2       labeling_0.4.2   colorspace_2.1-0
+## [11] tinytex_0.45     scales_1.2.1     fansi_1.0.4      grid_4.3.1       munsell_0.5.0   
+## [16] evaluate_0.21    tibble_3.2.1     lifecycle_1.0.3  compiler_4.3.1   dplyr_1.1.2     
+## [21] pkgconfig_2.0.3  rstudioapi_0.14  farver_2.1.1     R6_2.5.1         tidyselect_1.2.0
+## [26] utf8_1.2.3       pillar_1.9.0     magrittr_2.0.3   tools_4.3.1      withr_2.5.0     
+## [31] gtable_0.3.3
+\end{verbatim}
+\begin{alltt}
+\hlkwd{Sys.time}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## [1] "2023-07-25 21:17:20 CDT"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\end{document}
+=======
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[sc]{mathpazo}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+\hypersetup{
+ pdfstartview={XYZ null null 1}}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+
+\makeatother
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+
+
+\title{\title{\title{\title{\title{\title{\title{\title{\title{\title{\title{\title{\title{}}}}}}}}}}}}}
+
+
+
+\maketitle
+The results below are generated from an R script.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Assignment: ASSIGNMENT 7}
+\hlcom{# Name: Tang, Xin}
+\hlcom{# Date: 2023-07-26}
+
+\hlcom{## Set the working directory to the root of your DSC 520 directory}
+\hlkwd{setwd}\hlstd{(}\hlstr{"~/dsc520"}\hlstd{)}
+
+\hlcom{## Load the `data/r4ds/heights.csv` to}
+\hlkwd{library}\hlstd{(ggplot2)}
+
+\hlcom{# Fit a linear model}
+\hlstd{earn_lm} \hlkwb{<-}  \hlkwd{lm}\hlstd{(earn} \hlopt{~} \hlstd{ed} \hlopt{+} \hlstd{race} \hlopt{+} \hlstd{height} \hlopt{+} \hlstd{age} \hlopt{+} \hlstd{sex,} \hlkwc{data} \hlstd{= heights_df)}
+
+\hlcom{# View the summary of your model}
+\hlkwd{summary}\hlstd{(earn_lm)}
+\end{alltt}
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = earn ~ ed + race + height + age + sex, data = heights_df)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -39423  -9827  -2208   6157 158723 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  -41478.4    12409.4  -3.342 0.000856 ***
+## ed             2768.4      209.9  13.190  < 2e-16 ***
+## racehispanic  -1414.3     2685.2  -0.527 0.598507    
+## raceother       371.0     3837.0   0.097 0.922983    
+## racewhite      2432.5     1723.9   1.411 0.158489    
+## height          202.5      185.6   1.091 0.275420    
+## age             178.3       32.2   5.537 3.78e-08 ***
+## sexmale       10325.6     1424.5   7.249 7.57e-13 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 17250 on 1184 degrees of freedom
+## Multiple R-squared:  0.2199,	Adjusted R-squared:  0.2153 
+## F-statistic: 47.68 on 7 and 1184 DF,  p-value: < 2.2e-16
+\end{verbatim}
+\begin{alltt}
+\hlstd{predicted_df} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}
+  \hlkwc{earn} \hlstd{=} \hlkwd{predict}\hlstd{(earn_lm,} \hlkwc{newdata} \hlstd{= heights_df),}
+  \hlkwc{ed}\hlstd{=heights_df}\hlopt{$}\hlstd{ed,} \hlkwc{race}\hlstd{=heights_df}\hlopt{$}\hlstd{race,} \hlkwc{height}\hlstd{=heights_df}\hlopt{$}\hlstd{height,}
+  \hlkwc{age}\hlstd{=heights_df}\hlopt{$}\hlstd{age,} \hlkwc{sex}\hlstd{=heights_df}\hlopt{$}\hlstd{sex}
+  \hlstd{)}
+\hlkwd{View}\hlstd{(predicted_df)}
+
+\hlcom{## Compute deviation (i.e. residuals)}
+\hlstd{mean_earn} \hlkwb{<-} \hlkwd{mean}\hlstd{(heights_df}\hlopt{$}\hlstd{earn)}
+\hlcom{## Corrected Sum of Squares Total}
+\hlstd{sst} \hlkwb{<-} \hlkwd{sum}\hlstd{((mean_earn} \hlopt{-} \hlstd{heights_df}\hlopt{$}\hlstd{earn)}\hlopt{^}\hlnum{2}\hlstd{)}
+\hlcom{## Corrected Sum of Squares for Model}
+\hlstd{ssm} \hlkwb{<-} \hlkwd{sum}\hlstd{((mean_earn} \hlopt{-} \hlstd{age_predict_df}\hlopt{$}\hlstd{earn)}\hlopt{^}\hlnum{2}\hlstd{)}
+\hlcom{## Residuals}
+\hlstd{residuals} \hlkwb{<-} \hlstd{heights_df}\hlopt{$}\hlstd{earn} \hlopt{-} \hlstd{age_predict_df}\hlopt{$}\hlstd{earn}
+\hlcom{## Sum of Squares for Error}
+\hlstd{sse} \hlkwb{<-} \hlkwd{sum}\hlstd{(residuals}\hlopt{^}\hlnum{2}\hlstd{)}
+\hlcom{## R Squared}
+\hlstd{r_squared} \hlkwb{<-} \hlstd{ssm}\hlopt{/}\hlstd{sst}
+
+\hlcom{## Number of observations}
+\hlstd{n} \hlkwb{<-} \hlkwd{nrow}\hlstd{(heights_df)}
+\hlcom{## Number of regression paramaters}
+\hlstd{p} \hlkwb{<-} \hlnum{8}
+\hlcom{## Corrected Degrees of Freedom for Model}
+\hlstd{dfm} \hlkwb{<-} \hlstd{p}\hlopt{-}\hlnum{1}
+\hlcom{## Degrees of Freedom for Error}
+\hlstd{dfe} \hlkwb{<-} \hlstd{n}\hlopt{-}\hlstd{p}
+\hlcom{## Corrected Degrees of Freedom Total:   DFT = n - 1}
+\hlstd{dft} \hlkwb{<-} \hlstd{n} \hlopt{-} \hlnum{1}
+
+\hlcom{## Mean of Squares for Model:   MSM = SSM / DFM}
+\hlstd{msm} \hlkwb{<-} \hlstd{ssm} \hlopt{/} \hlstd{dfm}
+\hlcom{## Mean of Squares for Error:   MSE = SSE / DFE}
+\hlstd{mse} \hlkwb{<-} \hlstd{sse} \hlopt{/} \hlstd{dfe}
+\hlcom{## Mean of Squares Total:   MST = SST / DFT}
+\hlstd{mst} \hlkwb{<-} \hlstd{sst} \hlopt{/} \hlstd{dft}
+\hlcom{## F Statistic}
+\hlstd{f_score} \hlkwb{<-} \hlstd{msm} \hlopt{/} \hlstd{mse}
+
+\hlcom{## Adjusted R Squared R2 = 1 - (1 - R2)(n - 1) / (n - p)}
+\hlstd{adjusted_r_squared} \hlkwb{<-} \hlnum{1} \hlopt{-} \hlstd{(}\hlnum{1} \hlopt{-} \hlstd{r_squared)}\hlopt{*}\hlstd{(n} \hlopt{-} \hlnum{1}\hlstd{)} \hlopt{/} \hlstd{(n} \hlopt{-} \hlstd{p)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+The R session information (including the OS info, R version and all
+packages used):
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{sessionInfo}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## R version 4.3.1 (2023-06-16 ucrt)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 19045)
+## 
+## Matrix products: default
+## 
+## 
+## locale:
+## [1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8   
+## [3] LC_MONETARY=English_United States.utf8 LC_NUMERIC=C                          
+## [5] LC_TIME=English_United States.utf8    
+## 
+## time zone: America/Chicago
+## tzcode source: internal
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] ggplot2_3.4.2
+## 
+## loaded via a namespace (and not attached):
+##  [1] vctrs_0.6.2      cli_3.6.1        knitr_1.43       rlang_1.1.1      xfun_0.39       
+##  [6] highr_0.10       generics_0.1.3   glue_1.6.2       labeling_0.4.2   colorspace_2.1-0
+## [11] tinytex_0.45     scales_1.2.1     fansi_1.0.4      grid_4.3.1       munsell_0.5.0   
+## [16] evaluate_0.21    tibble_3.2.1     lifecycle_1.0.3  compiler_4.3.1   dplyr_1.1.2     
+## [21] pkgconfig_2.0.3  rstudioapi_0.14  farver_2.1.1     R6_2.5.1         tidyselect_1.2.0
+## [26] utf8_1.2.3       pillar_1.9.0     magrittr_2.0.3   tools_4.3.1      withr_2.5.0     
+## [31] gtable_0.3.3
+\end{verbatim}
+\begin{alltt}
+\hlkwd{Sys.time}\hlstd{()}
+\end{alltt}
+\begin{verbatim}
+## [1] "2023-07-25 21:17:20 CDT"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\end{document}
+>>>>>>> 8e5622a6f09ce9f92f8b4f9cbaea92919ea5ffcb
