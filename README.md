@@ -1,7 +1,7 @@
 # DSC 520 - Statistics for Data Science using R
 
 ## This class is to get familar to use R to handle all statistics program in data analysis.
-## my program is inunder folder 'xin'. final project is under \xin\final project
+## my program is under folder 'xin'. final project is under \xin\final project
 
 This is my project and assignment R program and outputs
 
